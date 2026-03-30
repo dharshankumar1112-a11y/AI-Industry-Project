@@ -5,10 +5,25 @@ import pdfplumber
 import re
 from datetime import datetime
 
-app = Flask(__name__)
+# Explicitly define template and static folders for cloud consistency
+template_dir = os.path.abspath('templates')
+static_dir = os.path.abspath('static')
+
+app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
 UPLOAD_FOLDER = "uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+# Debug: Print directory structure to logs on startup
+print(f"--- SERVER STARTUP ---")
+print(f"Current Directory: {os.getcwd()}")
+print(f"Templates Path: {template_dir}")
+print(f"Static Path: {static_dir}")
+if os.path.exists(template_dir):
+    print(f"Files in templates: {os.listdir(template_dir)}")
+else:
+    print("WARNING: templates folder NOT FOUND!")
+print(f"----------------------")
 
 # -------- CSV MACHINE ANALYSIS --------
 def normalize_columns(df):
