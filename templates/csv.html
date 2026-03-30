@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Predictor - AI Industry</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+    </script>
+    <style>
+        .progress-container { width: 100%; background: var(--border); border-radius: 10px; height: 16px; margin-top: 1rem; overflow: hidden; position: relative; }
+        .progress-bar { height: 100%; border-radius: 10px; transition: width 1s ease-in-out; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="brand">
+            <svg style="width: 28px; color: var(--accent);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            AI Industry Core
+        </div>
+        <a href="/" class="nav-link">System Architecture Overview</a>
+        <a href="/csv" class="nav-link active">Predictive Diagnostics Engine</a>
+        <a href="/pdf" class="nav-link">NLP Document Parser</a>
+        <button class="theme-toggle-btn" style="margin-top: 2rem;" onclick="toggleTheme()">
+            <svg style="width: 18px; margin-right: 8px; vertical-align: bottom;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+            Toggle Interface Theme
+        </button>
+    </div>
+
+    <div class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Predictive Kinematics Network</h1>
+            <p class="page-subtitle">Upload machine telemetry datasets structurally parsed in standardized arrays.</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="panel">
+                <div class="panel-header">Pipeline Parameters</div>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="file-upload-wrapper">
+                        <div class="file-icon">
+                            <svg style="width: 64px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                        <h3 style="margin-bottom: 0.5rem; color: var(--text-hc);">Intake Telemetry Source Matrix</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-lc);">Drop massive flat-files containing thermal, kinetic, and stress arrays.</p>
+                        <input type="file" name="file" accept=".csv" required>
+                    </div>
+                    <button type="submit" class="submit-btn" style="background: var(--accent);">Run Predictive Analysis</button>
+                </form>
+            </div>
+            
+            <div class="panel">
+                <div class="panel-header">Engine Connectivity Logs</div>
+                <!-- Dense tech info -->
+                <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div class="surface-box" style="flex: 1; text-align: center;">
+                        <span style="display: block; font-size: 0.8rem; color: var(--text-lc); text-transform: uppercase;">Engine DB Status</span>
+                        <span style="font-weight: 700; color: var(--success); font-size: 1.1rem;">Optimal</span>
+                    </div>
+                    <div class="surface-box" style="flex: 1; text-align: center;">
+                        <span style="display: block; font-size: 0.8rem; color: var(--text-lc); text-transform: uppercase;">Cache Memory</span>
+                        <span style="font-weight: 700; color: var(--text-hc); font-size: 1.1rem;">64 GB / 128 GB</span>
+                    </div>
+                </div>
+                <ul style="list-style-type: none; font-size: 0.9rem; color: var(--text-mc); line-height: 2;">
+                    <li><span style="color: var(--accent);">[SYS]</span> Model v3.4.1 actively listening for input sequences.</li>
+                    <li><span style="color: var(--accent);">[SYS]</span> Anomaly thresholds dynamically set to baseline nominals.</li>
+                    <li><span style="color: var(--accent);">[SEC]</span> Zero-day data retention policy is currently active. Target files will be securely wiped immediately after tensor parsing completes.</li>
+                </ul>
+            </div>
+
+            {% if result %}
+            <div class="panel" style="grid-column: 1 / -1;">
+                <div class="panel-header">Machine Health Diagnostics Panel</div>
+                
+                <div class="dashboard-grid" style="grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+                    
+                    <div>
+                        <!-- High Level Summary -->
+                        <div class="surface-box" style="margin-bottom: 1.5rem;">
+                            <h5 style="color: var(--accent); font-size: 1.1rem; margin-bottom: 1rem;">System Risk Probability</h5>
+                            <div style="font-size: 3rem; font-weight: 800; color: {% if result.risk > 70 %}var(--danger){% elif result.risk > 30 %}var(--warning-border){% else %}var(--success){% endif %};">
+                                {{ result.risk }}%
+                            </div>
+                            
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: {{ result.risk }}%; background: {% if result.risk > 70 %}var(--danger){% elif result.risk > 30 %}var(--warning-border){% else %}var(--success){% endif %};"></div>
+                            </div>
+                        </div>
+
+                        <!-- Mini Stats -->
+                        <div class="stat-grid">
+                            <div class="stat-card">
+                                <h4>Data Rows Scanned</h4>
+                                <div class="stat-value" style="color: var(--success);">{{ result.rows }}</div>
+                                <div class="stat-sub">Valid Telemetry Ticks</div>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Financial Alert</h4>
+                                <div class="stat-value" style="color: var(--text-hc);">{{ result.savings }}</div>
+                                <div class="stat-sub">Maintenance Allocation</div>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Supervised Matrix</h4>
+                                <div class="stat-value" style="color: var(--warning-border); font-size: 1.2rem;">{{ result.supervised_failure }}</div>
+                                <div class="stat-sub">Labeled Defaults</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <!-- Sensor Metrics -->
+                        <div class="surface-box" style="margin-bottom: 1.5rem;">
+                            <h5 style="color: var(--accent); font-size: 1.1rem; margin-bottom: 1rem;">Deep Sensor Metrics (Thermal / Kinetic)</h5>
+                            <div class="metric-row">
+                                <span class="metric-label">Max Temperature Spike</span>
+                                <span class="metric-value">{{ result.temp_spike }}</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Min Process Idle Temp</span>
+                                <span class="metric-value">{{ result.min_temp }}</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Average Rotational Kinetics</span>
+                                <span class="metric-value">{{ result.avg_rot }} RPM</span>
+                            </div>
+                        </div>
+
+                        <!-- Mechanical Analytics -->
+                        <div class="surface-box">
+                            <h5 style="color: var(--danger); font-size: 1.1rem; margin-bottom: 1rem;">Mechanical Analytics (Stress)</h5>
+                            <div class="metric-row">
+                                <span class="metric-label">Average Torque Output</span>
+                                <span class="metric-value">{{ result.avg_torque }} Nm</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Estimated Tool Wear Limit</span>
+                                <span class="metric-value" style="color: {% if result.avg_wear > 150 %}var(--danger){% else %}var(--text-mc){% endif %}; font-weight: 700;">{{ result.avg_wear }} min</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Structural Material Wear</span>
+                                <span class="metric-value" style="color: var(--success); font-weight: 700;">Nominal Stability</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

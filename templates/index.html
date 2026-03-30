@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Industry - Enterprise Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+    </script>
+    <style>
+        .log-row { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px dashed var(--border); font-size: 0.9rem; }
+        .log-row:last-child { border-bottom: none; }
+        .log-time { color: var(--text-lc); font-family: monospace; }
+        .log-event { color: var(--text-mc); }
+        .log-status { color: var(--success); font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="brand">
+            <svg style="width: 28px; color: var(--accent);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            AI Industry Core
+        </div>
+        <a href="/" class="nav-link active">System Architecture Overview</a>
+        <a href="/csv" class="nav-link">Predictive Diagnostics Engine</a>
+        <a href="/pdf" class="nav-link">NLP Document Parser</a>
+        
+        <div style="margin-top: 3rem; padding: 1.5rem; background: var(--card-surface); border-radius: 10px; border: 1px solid var(--border);">
+            <p style="font-size: 0.8rem; color: var(--text-lc); text-transform: uppercase; font-weight: 700; margin-bottom: 0.5rem;">System Health</p>
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--success);"></div>
+                <span style="font-size: 0.9rem; color: var(--text-hc); font-weight: 600;">All APIs Operational</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-mc);">Latency: 42ms (Cluster A)</p>
+        </div>
+
+        <button class="theme-toggle-btn" style="margin-top: 1.5rem;" onclick="toggleTheme()">
+            <svg style="width: 18px; margin-right: 8px; vertical-align: bottom;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+            Toggle Interface Theme
+        </button>
+    </div>
+
+    <div class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Enterprise Analytics Hub</h1>
+            <p class="page-subtitle">Central node for distributed manufacturing intelligence and procedural document arrays.</p>
+        </div>
+
+        <div class="dashboard-grid" style="margin-bottom: 2.5rem;">
+            <!-- Predictive Maintenance Node -->
+            <div class="panel">
+                <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    Kinematic Health Diagnostics Pipeline
+                    <span style="font-size: 0.8rem; background: var(--accent); color: white; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: 600;">v3.4.1</span>
+                </div>
+                <div class="surface-box" style="margin-bottom: 2rem;">
+                    <p style="margin-bottom: 0.5rem; color: var(--text-hc); font-weight: 600;">Supported Array Telemetry:</p>
+                    <ul style="padding-left: 1.5rem; line-height: 1.6; color: var(--text-lc); font-size: 0.95rem;">
+                        <li>Thermal Data (Air Temp, Process Temp [K/°C])</li>
+                        <li>Kinematic Data (Rotational Speed [RPM])</li>
+                        <li>Mechanical Stresses (Torque [Nm], Tool Wear [min])</li>
+                        <li>Supervised Logic Labeling (Failure Matrix)</li>
+                    </ul>
+                </div>
+                <p style="font-size: 0.9rem; color: var(--text-mc); margin-bottom: 1.5rem; line-height: 1.5;">This pipeline utilizes statistical mapping and risk distribution models to detect mechanical thresholds before catastrophic asset failure occurs.</p>
+                <a href="/csv" class="submit-btn" style="display: block; text-align: center; text-decoration: none;">Launch Engine</a>
+            </div>
+
+            <!-- Intelligent Document Node -->
+            <div class="panel">
+                <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    Unstructured NLP Legal Extractor
+                    <span style="font-size: 0.8rem; background: var(--accent); color: white; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: 600;">v2.0.8</span>
+                </div>
+                <div class="surface-box" style="margin-bottom: 2rem;">
+                    <p style="margin-bottom: 0.5rem; color: var(--text-hc); font-weight: 600;">Supported NLP Schemas:</p>
+                    <ul style="padding-left: 1.5rem; line-height: 1.6; color: var(--text-lc); font-size: 0.95rem;">
+                        <li>Standard Corporate Business Contracts</li>
+                        <li>Non-Disclosure Agreements (NDAs)</li>
+                        <li>Government Procurements & Tenders</li>
+                        <li>Unstructured Academic Legal Texts</li>
+                    </ul>
+                </div>
+                <p style="font-size: 0.9rem; color: var(--text-mc); margin-bottom: 1.5rem; line-height: 1.5;">This engine acts as a dynamic OCR multi-pass parser to isolate counterparties, financial liabilities, and standard legal jurisdictions across wildly unstructured documents.</p>
+                <a href="/pdf" class="submit-btn" style="display: block; text-align: center; text-decoration: none;">Launch Engine</a>
+            </div>
+        </div>
+
+        <!-- Lower Information Density Row -->
+        <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr; gap: 2.5rem;">
+            <div class="panel">
+                <div class="panel-header">System Activity Logs</div>
+                <div class="log-row">
+                    <span class="log-time">[14:32:01]</span>
+                    <span class="log-event">Kernel Reboot Sequence Completed</span>
+                    <span class="log-status">SUCCESS</span>
+                </div>
+                <div class="log-row">
+                    <span class="log-time">[14:28:44]</span>
+                    <span class="log-event">NLP Syntax Engine Synced with Govt Schema Registry</span>
+                    <span class="log-status">SYNCED</span>
+                </div>
+                <div class="log-row">
+                    <span class="log-time">[13:42:15]</span>
+                    <span class="log-event">Mechanical Analytics Library (v1.2) Linked</span>
+                    <span class="log-status">OK</span>
+                </div>
+                <div class="log-row">
+                    <span class="log-time">[11:04:39]</span>
+                    <span class="log-event">Security Protocol AES-256 Verified on /uploads</span>
+                    <span class="log-status">SECURE</span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">Security Architecture</div>
+                <p style="font-size: 0.9rem; color: var(--text-mc); line-height: 1.6; margin-bottom: 1rem;">All datasets (CSV and PDF) are processed instantaneously via server-side memory buffering. Strict ephemeral destruction guarantees that no sensitive proprietary telemetry or legal counterparties are persistently stored.</p>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <span style="font-size: 0.75rem; background: var(--border); color: var(--text-hc); padding: 0.3rem 0.7rem; border-radius: 20px; font-weight: 600;">SOC-2 Compliant</span>
+                    <span style="font-size: 0.75rem; background: var(--border); color: var(--text-hc); padding: 0.3rem 0.7rem; border-radius: 20px; font-weight: 600;">Zero-Trust Env</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

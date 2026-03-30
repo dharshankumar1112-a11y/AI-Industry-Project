@@ -1,0 +1,5 @@
+Air temperature [K],Process temperature [K],Rotational speed [rpm],Torque [Nm],Tool wear [min],Machine failure
+298.1,308.6,1550,42.8,10,0
+299.2,309.1,1600,45.2,15,0
+300.5,310.0,1700,55.5,25,1
+301.0,311.2,1800,60.0,40,1
